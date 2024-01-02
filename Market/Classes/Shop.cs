@@ -65,7 +65,7 @@ namespace Market.Classes
                 if (actor.IsMakeOrder)
                 {
                     actor.IsTakeOrder = true;
-                    _logger.LogToFile($"{actor.ThisActor.Name} клиент получил свой заказ");
+                    _logger.LogToFile($"Клиент {actor.ThisActor.Name} получил свой заказ");
                 }
             }
         }
@@ -81,7 +81,7 @@ namespace Market.Classes
                 if (actor.IsTakeOrder)
                 {
                     releaseActors.Add(actor);
-                    _logger.LogToFile($"{actor.ThisActor.Name} клиент ушел из очереди ");
+                    _logger.LogToFile($"Клиент {actor.ThisActor.Name} ушел из очереди ");
                 }
             }
             ReleaseFromMarket(releaseActors);
@@ -97,10 +97,19 @@ namespace Market.Classes
                 if (!actor.IsMakeOrder)
                 {
                     actor.IsMakeOrder = true;
-                    if (actor is PromotionalClient pc && CheckPromotion(pc))
-                        _logger.LogToFile($"{pc.ThisActor.Name} клиент сделал заказ по акции \"{pc.PromotionName}\"");
-                    else
-                        _logger.LogToFile($"{actor.ThisActor.Name} клиент сделал заказ");
+                    if (actor is PromotionalClient pc)
+                    {
+                        if (CheckPromotion(pc))
+                        {
+                            _logger.LogToFile($"Клиент {pc.ThisActor.Name} сделал заказ по акции \"{pc.PromotionName}\"");
+                            continue;
+                        }
+                        else
+                        {
+                            _logger.LogToFile($"Клиенту {actor.ThisActor.Name} отказано в участии в акции \"{pc.PromotionName}\"");
+                        }
+                    }
+                    _logger.LogToFile($"{actor.ThisActor.Name} клиент сделал заказ");
                 }
             }
         }
