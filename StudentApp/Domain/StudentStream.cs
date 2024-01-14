@@ -13,8 +13,8 @@ internal class StudentStream(int streamId, List<StudentGroup> groups) : IEnumera
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public override string ToString() 
-    { 
+    public override string ToString()
+    {
         StringBuilder sb = new($"Поток {StreamId}, количество групп: {Groups.Count}\n");
         foreach ((Student st, int n) in Groups.SelectMany(x => x).Order().Select((x, i) => (x, i + 1)))
             sb.AppendLine($"{n}. {st}");

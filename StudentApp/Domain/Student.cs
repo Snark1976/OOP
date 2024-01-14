@@ -5,7 +5,7 @@
 /// </summary>
 /// <param name="name"></param>
 /// <param name="age"></param>
-internal class Student(string name, int age) : Person(name, age), IComparable<Student>
+internal class Student(string name, int age) : Person<string, int>(name, age), IComparable<Student>
 {
     /// <summary>
     /// Внутреннее статическое поле, хранящее последний присвоенный идентификационный номер студента

@@ -13,7 +13,7 @@ internal class StudentGroup(List<Student> group, int idGroup) : IEnumerable<Stud
     /// <summary>
     /// Список студентов
     /// </summary>
-    public List<Student> Group { get; set; } = group;
+    public List<Student> Students { get; set; } = group;
 
     /// <summary>
     /// Номер группы
@@ -23,18 +23,18 @@ internal class StudentGroup(List<Student> group, int idGroup) : IEnumerable<Stud
     public override string ToString()
     {
         StringBuilder sb = new($"StudentGroup {IdGroup}:\n");
-        foreach ((Student st, int n) in Group.Order().Select((x, i) => (x, i + 1)))
+        foreach ((Student st, int n) in Students.Order().Select((x, i) => (x, i + 1)))
             sb.AppendLine($"{n}. {st}");
         return sb.ToString();
     }
 
-    public IEnumerator<Student> GetEnumerator() => new StudentEnumerator(Group);
+    public IEnumerator<Student> GetEnumerator() => new StudentEnumerator(Students);
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public int CompareTo(StudentGroup? other)
     {
         if (other == null) return 1;
-        int result = Math.Sign(Group.Count - other.Group.Count);
+        int result = Math.Sign(Students.Count - other.Students.Count);
         return result == 0 ? Math.Sign(IdGroup - other.IdGroup) : result;
     }
 }

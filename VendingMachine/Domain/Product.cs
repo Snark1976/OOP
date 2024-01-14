@@ -3,7 +3,7 @@ public class Product(int price, int place, string name, long id)
 {
     private int _price = price;
 
-    public int Price 
+    public int Price
     {
         get => _price;
         set => _price = value < 0 ? 10 : value;

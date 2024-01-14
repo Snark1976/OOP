@@ -130,7 +130,7 @@ namespace Market.Classes
         /// Проверка условий участия в акции
         /// </summary>
         /// <param name="promotionalClient">Акционный клиент.</param>
-        private bool CheckPromotion(PromotionalClient promotionalClient) => 
+        private bool CheckPromotion(PromotionalClient promotionalClient) =>
             promotionalClient.ClientId <= _promotions[promotionalClient.PromotionName];
     }
 }
