@@ -1,0 +1,20 @@
+public interface IEngine {
+    void start();
+}
+
+public class Car {
+    private IEngine engine;
+
+    public Car(IEngine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        this.engine.start();
+    }
+}
+    public class PetrolEngine implements IEngine{
+        @Override
+        public void start() {
+    }
+}
